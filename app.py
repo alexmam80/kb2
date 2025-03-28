@@ -18,11 +18,9 @@ db = SQLAlchemy(app)
 
 
 @app.before_request
-def require_login():
-    # Lista rutelor permise fără autentificare
-    allowed_routes = ['login', 'register', 'static']
-    if request.endpoint not in allowed_routes and not current_user.is_authenticated:
-        return redirect(url_for('login'))
+def check_cookies():
+    if not request.cookies.get('cookie_consent') and request.endpoint not in ['cookie_policy', 'set_cookie_consent']:
+        return redirect(url_for('cookie_policy'))
 
 from functools import wraps
 
