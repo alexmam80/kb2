@@ -38,9 +38,12 @@ def login_required_global(f):
 
 @app.before_request
 def check_cookie_consent():
-    # Verificare consimțământ cookie 
-    if not request.cookies.get('cookie_consent') and request.endpoint not in ['cookie_policy', 'set_cookie_consent']:
-        return redirect(url_for('cookie_policy'))
+    # Exclude anumite rute de la verificarea cookie-urilor
+    exempt_routes = ['cookie_policy', 'set_cookie_consent', 'static']
+    
+    if request.endpoint not in exempt_routes:
+        if not request.cookies.get('cookie_consent'):
+            return redirect(url_for('cookie_policy'))
 
 @app.route('/')
 @login_required_global
