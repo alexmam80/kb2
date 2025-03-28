@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="corp">
+    <div class="flex-container">
+        <div class="flex-container1">
+            <div class="image-container1">
+                <img src="{{ url_for('static', filename='images/photo7.jpg') }}" alt="Descriere imagine">
+            </div>
+            <div class="text-container1">
+                <h2>Puterea frumesetii</h2>
+                <p>Chiar și atotputernicul Pointing nu are control asupra textelor oarbe, este o viață aproape neortografică. Într-o zi, totuși, o mică linie de text oarbă pe nume Lorem Ipsum a decis să plece în Lumea Gramaticii.
+                <br>- Elımarea Tatuajuluı cu Lazer
+                <br>- Mıcropıgmentarea Sprınecelor
+                <br>- Mıcropıgmentarea Buzelor</p>
+            </div>
+        </div>
+    </div>
+    
+    <section class="flex-container">
+        <div class="flex-container2">
+            <div class="text-container2">
+                <h2>Tatuajul</h2>
+                <p>Tatuajul, cunoscut și sub denumirea de machiaj permanent, este o procedură apreciată de multe femei. Acesta este un machiaj care nu trebuie reînnoit în fiecare zi și spălat înainte de culcare. Este un tatuaj temporar, în timpul căruia un pigment natural de colorare este plasat sub straturile superioare ale pielii. Rezultatul este un machiaj de lungă durată, care nu se spală. Tatuajul își păstrează în mod ideal aspectul original, durează de la câteva luni la câțiva ani. Cu timpul, culoarea se estompează, dar acest lucru se întâmplă foarte lent.<br>
+                Specialistii salonului „Anastasia” cunosc cat de important este pentru tine sa arati perfect, asa ca suntem pregatiti sa iti oferim orice fel de tatuaj, realizat profesional si la un pret accesibil.</p>
+            </div>
+            <div class="image-container2">
+                <img src="{{ url_for('static', filename='images/tatuaj.jpg') }}" alt="Descriere imagine">
+            </div>
+        </div>
+    </section>
+    
+    <section class="flex-container">
+        <div class="flex-container3">
+            <div class="image-container3">
+                <img src="{{ url_for('static', filename='images/tatuaj2.jpg') }}" alt="Descriere imagine">
+            </div>
+            <div class="text-container3">
+                <h2>Varietăți de tatuaj în salonul de frumusețe „KristinaBeauty”</h2>
+                <p>Industria frumuseții oferă o gamă largă de tratamente de machiaj permanent care pot satisface aproape toate nevoile de bază ale femeilor.
+                Cele mai popular:
+                <br>- Conturul genelor. Zonele dintre gene sunt pătate. Creează efectul unui aspect deschis și gene groase, vă permite să ridicați vizual colțurile ochilor. Arata foarte natural.
+                <br>- Conturul ochilor. Vă permite să aveți un machiaj perfect fără efort zilnic. Săgețile pot fi subțiri și îndrăznețe, situate doar pe pleoapa superioară sau pe ambele.
+                <br>- Buze. Vă permite să aliniați asimetria, să schimbați ușor forma, să creați un contur clar. Dacă doriți, puteți face un contur cu umbrire sau umplere completă cu culoare. În acest din urmă caz, tatuajul va înlocui aplicarea rujului.
+                <br>- Sprâncene. Cel mai optim mod astăzi de a ajusta forma și culoarea sprâncenelor, pentru a obține un efect vizual de densitate. Există mai multe tehnici, inclusiv microblading și pulverizare.</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="galerie">
+    <h2>Galerie</h2>
+    <p>Uită-te la lucrările noastre recente!</p>
+    <div class="galerie-container">
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo1.jpg') }}" alt="Poză 1">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo2.jpg') }}" alt="Poză 2">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo3.jpg') }}" alt="Poză 3">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo4.png') }}" alt="Poză 4">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo5.jpg') }}" alt="Poză 5">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo6.jpg') }}" alt="Poză 6">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo7.jpg') }}" alt="Poză 7">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo8.jpg') }}" alt="Poză 8">
+        </div>
+        <div class="galerie-item">
+            <img src="{{ url_for('static', filename='images/photo9.jpg') }}" alt="Poză 9">
+        </div>
+    </div>
+</section>
+
+<!-- Caruselul va fi generat dinamic de JavaScript -->
+<div id="carousel" class="carousel">
+    <div class="carousel-content">
+        <button class="close-btn" id="closeBtn">Închide</button>
+        
+        <!-- Săgețile pentru navigare -->
+        <button class="nav-btn prev-btn" id="prevBtn">❮</button>
+        <button class="nav-btn next-btn" id="nextBtn">❯</button>
+
+        <div class="carousel-images">
+            <!-- Imaginile vor fi adăugate dinamic aici -->
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const galerieItems = document.querySelectorAll('.galerie-item img');
+    const galerieContainer = document.querySelector('.galerie-container');
+    const carousel = document.getElementById('carousel');
+    const carouselImagesContainer = document.querySelector('.carousel-images');
+    const closeBtn = document.getElementById('closeBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0; // Indexul imaginii curente
+
+    galerieItems.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            // Ascundem galeria
+            galerieContainer.style.display = 'none';
+
+            // Arătăm caruselul
+            carousel.style.display = 'flex';
+
+            // Curățăm caruselul de imagini anterioare
+            carouselImagesContainer.innerHTML = '';
+
+            // Adăugăm toate imaginile din galerie în carusel
+            galerieItems.forEach((image) => {
+                const imgElement = document.createElement('img');
+                imgElement.src = image.src;
+                imgElement.alt = image.alt;
+                carouselImagesContainer.appendChild(imgElement);
+            });
+
+            // Setăm imaginea selectată ca primă imagine
+            currentIndex = index;
+            updateCarousel();
+        });
+    });
+
+    // Navigare înapoi
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === 0) ? galerieItems.length - 1 : currentIndex - 1;
+        updateCarousel();
+    });
+
+    // Navigare înainte
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex === galerieItems.length - 1) ? 0 : currentIndex + 1;
+        updateCarousel();
+    });
+
+    // Buton de închidere
+    closeBtn.addEventListener('click', () => {
+        // La închiderea caruselului
+        carousel.style.display = 'none'; // Ascundem caruselul
+        galerieContainer.style.display = 'grid'; // Reapare galeria
+    });
+
+    // Actualizarea imaginii vizibile în carusel
+    function updateCarousel() {
+        const images = carouselImagesContainer.children;
+        for (let i = 0; i < images.length; i++) {
+            images[i].style.display = i === currentIndex ? 'block' : 'none';
+        }
+    }
+});
+</script>
+{% endblock %}
