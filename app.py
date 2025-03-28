@@ -12,7 +12,7 @@ DB_HOST = 'dpg-cvjaa4ili9vc73eje560-a'
 DB_NAME = 'kb2'
 
 # Construiește URL-ul de conexiune
-DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///fallback.db')
+DATABASE_URL = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-secret-key-please-change-in-production')
