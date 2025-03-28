@@ -6,10 +6,53 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
+
+
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # SQLite database
 db = SQLAlchemy(app)
+
+
+
+@app.before_request
+def require_login():
+    # Lista rutelor permise fără autentificare
+    allowed_routes = ['login', 'register', 'static']
+    if request.endpoint not in allowed_routes and not current_user.is_authenticated:
+        return redirect(url_for('login'))
+
+from functools import wraps
+
+def login_required_global(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return redirect(url_for('login', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
+
+# Aplică decoratorul global (opțional dacă folosești @app.before_request)
+@app.route('/')
+@login_required_global
+def index():
+    return render_template('index.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # ... (verificări existente)
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('dashboard'))
+    
+    return render_template('login.html')
+
+
 
 
 # Configurare Flask-Login
