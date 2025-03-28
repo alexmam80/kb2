@@ -5,9 +5,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import os
 
+# Detalii conexiune
+DB_USERNAME = 'alexmam80'
+DB_PASSWORD = 'h846kPdU9iUOBNAl5Z70FryMZ2T7wYL5'
+DB_HOST = 'dpg-cvjaa4ili9vc73eje560-a'
+DB_NAME = 'kb2'
+
+# Construiește URL-ul de conexiune
+DATABASE_URL = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-secret-key-please-change-in-production')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///site.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
