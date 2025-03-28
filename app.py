@@ -12,7 +12,7 @@ DB_HOST = 'dpg-cvjaa4ili9vc73eje560-a'
 DB_NAME = 'kb2'
 
 # Construiește URL-ul de conexiune
-DATABASE_URL = f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
+DATABASE_URL = 'postgresql://alexmam80:h846kPdU9iUOBNAl5Z70FryMZ2T7wYL5@dpg-cvjaa4ili9vc73eje560-a/kb2'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-secret-key-please-change-in-production')
