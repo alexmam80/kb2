@@ -36,14 +36,15 @@ def login_required_global(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@app.before_request
-def check_cookie_consent():
-    # Exclude anumite rute de la verificarea cookie-urilor
-    exempt_routes = ['cookie_policy', 'set_cookie_consent', 'static']
-    
-    if request.endpoint not in exempt_routes:
-        if not request.cookies.get('cookie_consent'):
-            return redirect(url_for('cookie_policy'))
+@app.route('/set-cookie-consent', methods=['POST'])
+def set_cookie_consent():
+    response = make_response(redirect(url_for('index')))
+    response.set_cookie('cookie_consent', 'true', max_age=30*24*60*60)  # Cookie valabil 30 de zile
+    return response
+
+@app.route('/politica-cookie-uri')
+def cookie_policy():
+    return render_template('cookie_policy.html')
 
 @app.route('/')
 @login_required_global
