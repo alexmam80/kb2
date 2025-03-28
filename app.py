@@ -1,8 +1,16 @@
 # pip install flask
-from flask import Flask, render_template
-from flask import request, jsonify
+from flask import Flask, render_template, request, redirect, url_for, make_response
+from cookies import CookieConsent, setup_cookie_routes
+import os
 
 app = Flask(__name__)
+app.secret_key = 'your-secret-key-here'  # Important pentru securitate!
+
+# Inițializează sistemul de cookie-uri
+cookie_consent = CookieConsent(app)
+setup_cookie_routes(app)
+
+
 
 @app.route('/')
 def index():
@@ -20,6 +28,10 @@ def galerie():
 def contacte():
     return render_template('contacte.html')
 
+# Adaugă această rută pentru politica de cookie-uri
+@app.route('/politica-cookie-uri')
+def cookie_policy():
+    return render_template('cookie_policy.html')
 
 
 if __name__ == '__main__':
