@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response
+from flask import Flask, render_template, request, redirect, url_for, make_response, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -36,15 +36,6 @@ def login_required_global(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@app.route('/set-cookie-consent', methods=['POST'])
-def set_cookie_consent():
-    response = make_response(redirect(url_for('index')))
-    response.set_cookie('cookie_consent', 'true', max_age=30*24*60*60)  # Cookie valabil 30 de zile
-    return response
-
-@app.route('/politica-cookie-uri')
-def cookie_policy():
-    return render_template('cookie_policy.html')
 
 @app.route('/')
 @login_required_global
@@ -135,9 +126,56 @@ def galerie():
 def contacte():
     return render_template('contacte.html')
 
+
+
+
+
+
+
+
+@app.route('/set-cookie-consent', methods=['POST'])
+def set_cookie_consent():
+    # Creează un răspuns care redirecționează către pagina principală
+    response = make_response(redirect(url_for('index')))
+    
+    # Setează cookie-ul de consimțământ pentru 30 de zile
+    response.set_cookie('cookie_consent', 'true', max_age=30*24*60*60)
+    
+    # Adaugă un mesaj flash pentru confirmare
+    flash('Ați acceptat utilizarea cookie-urilor.', 'success')
+    
+    return response
+    
 @app.route('/politica-cookie-uri')
 def cookie_policy():
     return render_template('cookie_policy.html')
+
+@app.before_request
+def check_cookie_consent():
+    # Liste de rute exceptate de la verificarea cookie-urilor
+    exempt_routes = [
+        'cookie_policy',  # Pagina politicii de cookie-uri
+        'set_cookie_consent',  # Ruta pentru setarea consimțământului 
+        'static',  # Resurse statice 
+        'login',  # Pagina de autentificare
+        'register'  # Pagina de înregistrare
+    ]
+    
+    # Verifică dacă ruta curentă necesită consimțământ pentru cookie-uri
+    if request.endpoint not in exempt_routes:
+        # Verifică dacă cookie-ul de consimțământ există
+        if not request.cookies.get('cookie_consent'):
+            # Redirecționează către pagina politicii de cookie-uri
+            return redirect(url_for('cookie_policy'))
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     # Creează baza de date dacă nu există
