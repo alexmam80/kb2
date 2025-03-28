@@ -30,14 +30,7 @@ def load_user(user_id):
 with app.app_context():
     db.create_all()
 
-# === RUTE PRINCIPALE ===
-@app.route('/')
-def index():
-    if request.cookies.get('cookie_consent') == 'true':
-        response = make_response(render_template('index.html'))
-        response.set_cookie('analytics_cookie', 'enabled', max_age=30*24*60*60)
-        return response
-    return render_template('index.html')
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
