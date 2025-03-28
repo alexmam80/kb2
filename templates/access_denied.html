@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="access-denied">
+    <h2>Acces Restricționat</h2>
+    <p>Trebuie să fii autentificat pentru a accesa această pagină.</p>
+    <a href="{{ url_for('login') }}" class="btn-login">Autentificare</a>
+    <p>Nu ai cont? <a href="{{ url_for('register') }}">Înregistrează-te</a></p>
+</div>
+
+<style>
+    .access-denied {
+        max-width: 600px;
+        margin: 50px auto;
+        text-align: center;
+    }
+    .btn-login {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
