@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="cookie-policy">
+    <h1>Politica de Utilizare a Cookie-urilor</h1>
+    
+    <section>
+        <h2>Ce sunt cookie-urile?</h2>
+        <p>Cookie-urile sunt fișiere text de mici dimensiuni pe care site-ul le salvează pe dispozitivul tău.</p>
+    </section>
+
+    <section>
+        <h2>Cum folosim cookie-urile?</h2>
+        <ul>
+            <li><strong>Cookie-uri esențiale:</strong> Pentru funcționarea de bază a site-ului</li>
+            <li><strong>Cookie-uri de performanță:</strong> Pentru analiza traficului</li>
+            <li><strong>Cookie-uri de preferințe:</strong> Pentru a-ți aminti setările</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Cum poți controla cookie-urile</h2>
+        <p>Poți modifica setările cookie-urilor în browserul tău oricând.</p>
+    </section>
+</div>
+
+<style>
+    .cookie-policy {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    .cookie-policy h1 {
+        color: #333;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    .cookie-policy h2 {
+        color: #444;
+        margin-top: 25px;
+    }
+    .cookie-policy ul {
+        padding-left: 20px;
+    }
+</style>
+{% endblock %}
