@@ -21,7 +21,7 @@ def galerie():
     return render_template('galerie.html')
 
 @app.route('/contacte')
-def contact():
+def contacte():
     return render_template('contacte.html')
 
 if __name__ == '__main__':
