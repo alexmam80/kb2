@@ -182,7 +182,13 @@ def check_cookie_consent():
 
 
 
-
+@app.route('/debug')
+def debug():
+    try:
+        users = User.query.all()
+        return f"Conexiune la baza de date reușită. Utilizatori: {len(users)}"
+    except Exception as e:
+        return f"Eroare la conectarea la baza de date: {str(e)}"
 
 
 
