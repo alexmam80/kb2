@@ -20,14 +20,7 @@ def galerie():
 def contacte():
     return render_template('contacte.html')
 
-@app.route('/')
-def index():
-    if request.cookies.get('cookie_consent') == 'true':
-        # Setează cookie-uri de analiză doar dacă există consimțământ
-        response = make_response(render_template('index.html'))
-        response.set_cookie('analytics_cookie', 'enabled', max_age=30*24*60*60)  # Expiră în 30 de zile
-        return response
-    return render_template('index.html')
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000 , debug=True)
+    app.run(host='0.0.0.0', port=10000)
