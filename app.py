@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, make_response, flash, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -41,6 +41,7 @@ def create_users_table():
     conn.commit()
     cur.close()
     conn.close()
+    
 # Ruta pentru înregistrare utilizator
 @app.route('/register', methods=['POST'])
 def register():
@@ -68,6 +69,18 @@ def register():
         cur.close()
         conn.close()
 
+
+
+
+
+def login_required_global(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:  # sau altă condiție de autentificare
+            return redirect(url_for('login'))  # redirecționează către pagina de login
+        return f(*args, **kwargs)
+    return decorated_function
+    
 # Ruta pentru autentificare
 @app.route('/login', methods=['POST'])
 def login():
