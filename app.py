@@ -20,7 +20,7 @@ def servicii():
 def galerie():
     return render_template('galerie.html')
 
-@app.route('/contact')
+@app.route('/contacte')
 def contact():
     return render_template('contacte.html')
 
