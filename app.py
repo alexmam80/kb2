@@ -24,21 +24,15 @@ def contacte():
 
 
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact.db'
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#app.config['UPLOAD_FOLDER'] = 'uploads'
-#app.secret_key = 'cheie-secreta-foarte-puternica'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.secret_key = 'cheie-secreta-foarte-puternica'
 
 # Creează directorul pentru upload dacă nu există
-# os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 
-
-
-
-# Configurare baza de date
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://alexmam80:h846kPdU9iUOBNAl5Z70FryMZ2T7wYL5@dpg-cvjaa4ili9vc73eje560-a/kb2')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
@@ -97,8 +91,6 @@ def submit_form():
     except Exception as e:
         app.logger.error(f"Eroare la procesarea formularului: {str(e)}")
         return jsonify({'error': str(e)}), 500
-
-
 
 
 
