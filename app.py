@@ -115,17 +115,17 @@ def dashboard():
     return render_template('dashboard.html', user=current_user)
 
 @app.route('/servicii')
-@login_required_global
+@login_required
 def servicii():
     return render_template('servicii.html')
 
 @app.route('/galerie')
-@login_required_global
+@login_required
 def galerie():
     return render_template('galerie.html')
 
 @app.route('/contacte')
-@login_required_global
+@login_required
 def contacte():
     return render_template('contacte.html')
 
