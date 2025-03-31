@@ -15,7 +15,7 @@ DB_NAME = 'kb2'
 DATABASE_URL = 'postgresql://alexmam80:h846kPdU9iUOBNAl5Z70FryMZ2T7wYL5@dpg-cvjaa4ili9vc73eje560-a/kb2'
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-secret-key-please-change-in-production')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', '23jkh4b5k2j3h4b5k2j3h4b5')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -182,13 +182,7 @@ def check_cookie_consent():
 
 
 
-@app.route('/debug')
-def debug():
-    try:
-        users = User.query.all()
-        return f"Conexiune la baza de date reușită. Utilizatori: {len(users)}"
-    except Exception as e:
-        return f"Eroare la conectarea la baza de date: {str(e)}"
+
 
 
 
