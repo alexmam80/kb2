@@ -73,13 +73,6 @@ def register():
 
 
 
-def login_required_global(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' not in session:  # sau altă condiție de autentificare
-            return redirect(url_for('login'))  # redirecționează către pagina de login
-        return f(*args, **kwargs)
-    return decorated_function
     
 # Ruta pentru autentificare
 @app.route('/login', methods=['POST'])
