@@ -24,7 +24,7 @@ def contacte():
 
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance_path, 'contact.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.secret_key = 'cheie-secreta-foarte-puternica'
