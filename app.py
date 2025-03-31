@@ -187,16 +187,57 @@ def check_cookie_consent():
 
 
 
+@app.route('/debug-db')
+def debug_db():
+    try:
+        # Încearcă să facă o interogare simplă
+        result = db.session.execute('SELECT 1').fetchone()
+        
+        # Verifică dacă tabelul utilizatorilor există
+        user_count = None
+        try:
+            user_count = User.query.count()
+        except:
+            pass
+        
+        return f"""
+        <h1>Debug Bază de Date</h1>
+        <p>Conexiunea la baza de date: <strong>Funcțională</strong></p>
+        <p>Rezultat interogare de test: {result}</p>
+        <p>URL Bază de Date: {DATABASE_URL}</p>
+        <p>Număr utilizatori: {user_count}</p>
+        """
+    except Exception as e:
+        return f"""
+        <h1>Debug Bază de Date</h1>
+        <p>Conexiunea la baza de date: <strong>Eroare</strong></p>
+        <p>Eroare: {str(e)}</p>
+        <p>URL Bază de Date: {DATABASE_URL}</p>
+        """
+
+
+
+
 
 
 if __name__ == '__main__':
-    # Creează baza de date dacă nu există
+    # Creează tabelele bazei de date dacă nu există
     with app.app_context():
         db.create_all()
+        # Poți adăuga un mesaj de debugging
+        print("Tabelele bazei de date au fost create cu succes.")
+
+
     
     # Configurare pentru mediul de producție
+    port = int(os.environ.get('PORT', 10000))
+    debug = os.environ.get('FLASK_DEBUG', 'False') == 'True'
+    
+    print(f"Aplicația va rula pe portul {port} cu debug={debug}")
+    print(f"Utilizăm URL-ul bazei de date: {DATABASE_URL}")
+    
     app.run(
         host='0.0.0.0', 
-        port=int(os.environ.get('PORT', 10000)),
-        debug=os.environ.get('FLASK_DEBUG', 'False') == 'True'
+        port=port,
+        debug=debug
     )
