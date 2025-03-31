@@ -10,7 +10,7 @@ import os
 DB_USERNAME = 'alexmam80'
 DB_PASSWORD = 'h846kPdU9iUOBNAl5Z70FryMZ2T7wYL5'
 DB_HOST = 'dpg-cvjaa4ili9vc73eje560-a'
-DB_NAME = 'kb2'
+DB_NAME = 'kb2-db'
 
 # Construiește URL-ul de conexiune
 DATABASE_URL = 'postgresql://alexmam80:h846kPdU9iUOBNAl5Z70FryMZ2T7wYL5@dpg-cvjaa4ili9vc73eje560-a/kb2'
