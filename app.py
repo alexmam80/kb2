@@ -190,8 +190,9 @@ def check_cookie_consent():
 @app.route('/debug-db')
 def debug_db():
     try:
-        # Încearcă să facă o interogare simplă
-        result = db.session.execute('SELECT 1').fetchone()
+        # Modifică această linie pentru a utiliza funcția text() pentru expresiile SQL
+        from sqlalchemy import text
+        result = db.session.execute(text('SELECT 1')).fetchone()
         
         # Verifică dacă tabelul utilizatorilor există
         user_count = None
